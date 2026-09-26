@@ -24,7 +24,7 @@ export function getPolicy(mode: LabMode): Policy {
   if (mode === "insecure") {
     return {
       mode,
-      agentId: "user:sundar@laptop",
+      agentId: "user:sre@laptop",
       agentKind: "user-impersonation",
       rbac: "cluster-admin (standing kubeconfig)",
       allowedTools: [...ALL_TOOLS],

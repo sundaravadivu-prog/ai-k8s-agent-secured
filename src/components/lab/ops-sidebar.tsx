@@ -18,7 +18,7 @@ export function OpsSidebar() {
   const namespaces = namespacesIn(cluster)
 
   return (
-    <aside className="flex min-h-0 flex-col gap-3 lg:overflow-y-auto">
+    <aside className="order-2 flex min-h-0 flex-col gap-3 lg:order-1 lg:overflow-y-auto">
       <section className="rounded-xl bg-[#12141a] p-4 ring-1 ring-white/8">
         <p className="text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
           1 · Agent identity

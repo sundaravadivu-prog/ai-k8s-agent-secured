@@ -1,6 +1,6 @@
 "use client"
 
-import { FormEvent, useState } from "react"
+import { FormEvent, useEffect, useRef, useState } from "react"
 import { AlertTriangle, ShieldCheck, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
@@ -29,7 +29,14 @@ const PRESETS = [
 export function AgentConsole() {
   const { messages, send, busy, mode, token } = useLab()
   const [draft, setDraft] = useState(PRESETS[0].text)
+  const scroller = useRef<HTMLDivElement>(null)
   const dead = token.revoked
+
+  useEffect(() => {
+    const node = scroller.current
+    if (!node) return
+    node.scrollTop = node.scrollHeight
+  }, [messages, busy])
 
   function onSubmit(event: FormEvent) {
     event.preventDefault()
@@ -37,7 +44,7 @@ export function AgentConsole() {
   }
 
   return (
-    <section className="flex min-h-[540px] flex-col overflow-hidden rounded-xl bg-[#12141a] ring-1 ring-white/8 lg:min-h-0">
+    <section className="order-1 flex min-h-[540px] flex-col overflow-hidden rounded-xl bg-[#12141a] ring-1 ring-white/8 lg:order-2 lg:min-h-0">
       <div className="flex items-start justify-between gap-3 border-b border-white/8 px-4 py-3">
         <div>
           <p className="text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
@@ -54,7 +61,10 @@ export function AgentConsole() {
         </span>
       </div>
 
-      <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-4 py-4">
+      <div
+        ref={scroller}
+        className="min-h-0 flex-1 space-y-3 overflow-y-auto px-4 py-4"
+      >
         {messages.length === 0 ? (
           <div className="rounded-lg border border-dashed border-white/12 bg-white/3 px-4 py-6">
             <p className="text-sm font-medium">Empty session</p>

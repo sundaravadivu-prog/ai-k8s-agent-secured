@@ -9,7 +9,7 @@ export function ReviewSidebar() {
   const pending = approvals.filter((item) => item.status === "pending")
 
   return (
-    <aside className="flex min-h-0 flex-col gap-3 lg:overflow-y-auto">
+    <aside className="order-3 flex min-h-0 flex-col gap-3 lg:overflow-y-auto">
       <section className="rounded-xl bg-[#12141a] p-4 ring-1 ring-white/8">
         <p className="text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
           4 · Human-in-the-loop
